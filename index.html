@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pixel Study Pug Companion - Pro Edition</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+    <div id="environment">
+        <div class="pixel-bg-layer"></div>
+        <div id="pet-wrapper" onclick="petPug()">
+            <div id="base-pug"></div>
+            <div id="costume-overlay"></div>
+            <div id="shop-overlay"></div>
+        </div>
+    </div>
+
+    <div id="camera-panel" class="panel active">
+        <h2>Study Focus <span class="coin-display" onclick="spawnCoinDrop(10)">🪙 <span class="shop-coin-display">150</span></span></h2>
+        <p style="color: var(--text-muted); margin-top: 0;">Focus to earn coins!</p>
+        <div id="timer-display" onclick="openTimePicker()">25:00</div>
+        <input type="time" id="native-time-picker" class="time-picker-hidden" value="00:25" onchange="saveNativeTime()" onblur="saveNativeTime()">
+        <button class="btn" id="start-timer-btn" onclick="toggleTimer()">Start Session</button>
+    </div>
+
+    <div id="sparkles-panel" class="panel">
+        <h2 style="margin-bottom: 5px;">Costume Designer</h2>
+        <p style="color: var(--text-muted); margin-top: 0; font-size: 0.85rem;">Draw directly on the pattern grid.</p>
+        <div id="editor-grid"></div>
+        <div class="editor-controls">
+            <button class="btn" style="flex:1; background: #e74c3c;" onclick="clearCostume()">Clear</button>
+            <button class="btn" style="flex:1; background: #2ecc71;" onclick="eraserMode()">Eraser</button>
+        </div>
+        <p style="margin: 15px 0 5px 0; font-weight: bold;">Color Palette</p>
+        <div id="palette"></div>
+
+        <div class="wardrobe-section">
+            <h3 style="margin: 0 0 10px 0; font-size: 1rem;">My Wardrobe</h3>
+            <div class="wardrobe-controls">
+                <input type="text" id="costume-name-input" placeholder="Name your costume...">
+                <button class="btn" style="padding: 10px; font-size: 0.9rem;" onclick="saveCostume()">Save</button>
+            </div>
+            <div id="wardrobe-list"></div>
+            <div class="wardrobe-controls" style="margin-top: 15px;">
+                <input type="text" id="costume-import-input" placeholder="Paste a share code...">
+                <button class="btn" style="padding: 10px; font-size: 0.9rem; background: var(--accent);" onclick="importCostume()">Import</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="inventory-panel" class="panel">
+        <h2>My Items <span class="coin-display">🪙 <span class="shop-coin-display">150</span></span></h2>
+        <p style="color: var(--text-muted); margin-top: 0; font-size: 0.85rem;">Equip your purchased items here.</p>
+        <div id="inventory-container" class="grid-container"></div>
+    </div>
+
+    <div id="shop-panel" class="panel">
+        <h2>Item Shop <span class="coin-display">🪙 <span class="shop-coin-display">150</span></span></h2>
+        <p style="color: var(--text-muted); margin-top: 0; font-size: 0.85rem;">Spend focus coins on pixel accessories.</p>
+        <div id="shop-container" class="grid-container"></div>
+    </div>
+
+    <div id="friends-panel" class="panel">
+        <h2>Leaderboard</h2>
+        <p style="color: var(--text-muted); margin-top: 0; font-size: 0.85rem;">See what your friends are doing.</p>
+        <button class="btn add-friend-btn" onclick="alert('Friend Code Copied: PUG-4X9B')">+ Add Friend</button>
+        <div id="friends-container"></div>
+    </div>
+
+    <nav>
+        <button class="nav-btn active" data-target="camera" onclick="switchTab('camera', this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Focus</button>
+        <button class="nav-btn" data-target="sparkles" onclick="switchTab('sparkles', this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>Design</button>
+        <button class="nav-btn" data-target="inventory" onclick="switchTab('inventory', this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>Bag</button>
+        <button class="nav-btn" data-target="shop" onclick="switchTab('shop', this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Shop</button>
+        <button class="nav-btn" data-target="friends" onclick="switchTab('friends', this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 20V10M12 20V4M6 20v-4" stroke-linecap="round" stroke-linejoin="round"/></svg>Rank</button>
+    </nav>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
